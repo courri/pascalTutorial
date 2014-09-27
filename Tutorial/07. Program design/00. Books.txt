@@ -1,5 +1,5 @@
 Brainerd 7
-Dale 13
+Dale 1, 13
 Forsyth 12
 Ganeshan 
 Gonnet
