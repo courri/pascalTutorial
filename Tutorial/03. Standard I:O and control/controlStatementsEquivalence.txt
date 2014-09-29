@@ -1,0 +1,32 @@
+1. Show that any repeat statement can be written using if and while.
+	Consider the general forms of both control structures:
+
+	repeat						while Boolean do
+		begin						begin
+			S1;							S1;
+			.							.
+			.							.	
+			.							.
+			Sn 							Sn
+		end  						end;
+	until Boolean;
+
+	Consider the semantics of each structure as follows:
+
+	|<repeat...until>|, Repeats a set of commands, check if Boolean, if it's true, stop, otherwise, repeat
+						the iteration.
+
+	|<while...do>|, Check the Boolean, if it's true, execute the enclosed set of commands, otherwise, stop
+
+	repeat...unitl, executes the set pf instructions at least once.
+
+	if not Boolean then
+		assignments
+	while not Boolean do
+		begin
+			S1; ... Sn
+		end;
+
+2. The converse (while can be written using if and repeat).
+
+	Same idea
