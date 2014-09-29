@@ -21,11 +21,11 @@ var
 
 begin
 	ch := BLANK;
-	while not (('0' <= ch) and (ch < chr(ord('0') + (radix - 1)))) do
+	while not (('0' <= ch) and (ch < chr(ord('0') + (radix)))) do
 		read(ch);
 	result := 0;
 	integer_part := 0;
-	while (('0' <= ch) and (ch < chr(ord('0') + (radix - 1)))) do
+	while (('0' <= ch) and (ch < chr(ord('0') + (radix)))) do
 		begin
 			result := radix * result + ord(ch) - ord('0');
 			integer_part := succ(integer_part);
@@ -36,7 +36,7 @@ begin
 			is_real := true;
 			scale := 0;
 			read(ch);
-			while (('0' <= ch) and (ch < chr(ord('0') + (radix - 1)))) do
+			while (('0' <= ch) and (ch < chr(ord('0') + (radix)))) do
 				begin
 					result := radix  * result + ord(ch) - ord('0');
 					read(ch);
