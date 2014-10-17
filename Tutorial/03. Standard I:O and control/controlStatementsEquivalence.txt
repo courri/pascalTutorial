@@ -9,7 +9,7 @@
 			.							.
 			Sn 							Sn
 		end  						end;
-	until Boolean;
+	until not Boolean;
 
 	Consider the semantics of each structure as follows:
 
