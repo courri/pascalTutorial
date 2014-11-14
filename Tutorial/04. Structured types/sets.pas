@@ -5,9 +5,13 @@ type
 	dessert = set of food;
 
 var
-	sundae, passion : dessert;
+	sundae, passion, loefoi : dessert;
 
 begin
-	passion := [nuts .. passionfruit]
+	passion := [nuts .. passionfruit];
 	sundae := [apples .. nuts];
+	loefoi := passion * sundae; (* UNION *)
+	loefoi := passion - sundae; (* INTERSECTION *)
+	writeln([] <= passion); (* CONTAINS EMPTY SETs *)
+	writeln(nuts in passion); (* INCLUSION *)
 end.
