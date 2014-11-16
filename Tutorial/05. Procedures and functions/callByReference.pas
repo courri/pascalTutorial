@@ -12,10 +12,4 @@ begin
 	writeln(x);
 	change;
 	writeln(x);
-	change;
-	writeln(x);
-	change;
-	writeln(x);
-	change;
-	writeln(x);
 end.
