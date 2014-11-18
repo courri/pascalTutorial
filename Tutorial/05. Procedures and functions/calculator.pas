@@ -13,9 +13,9 @@
 	Usage:
 		INPUT: 180 / (2 * 3.14159), 16 * 62.5 * 27, 169 * (5 + 8);
 		OUTPUT:
-					28.647913
-				27000
-				 2197
+		     	28.65
+ 			 27000.00
+  			  2197.00
 }
 
 program calculator(input, output);
@@ -42,12 +42,12 @@ program calculator(input, output);
 
 	function substraction(a, b : real) : real;
 	begin
-		addition := a - b
+		substraction := a - b
 	end;
 
 (* ======================== PROCEDURES ======================== *)
 
-	procedure readchar(var ch : char,
+	procedure readchar(var ch : char; 
 					   var charpos : integer);
 
 		const
@@ -72,7 +72,7 @@ program calculator(input, output);
 		until ch <> BLANLK;
 	end;
 
-	procedure reporterror(var errchar : char,
+	procedure reporterror(var errchar : char;
 						  var errcharpos : integer);
 
 		const
@@ -80,12 +80,13 @@ program calculator(input, output);
 
 	begin
 		writeln(MARKER : errcharpos);
+
 		while not (errchar = SEPARATOR) or (errchar = TERMINATOR) do
 			readchar(errchar, errcharpos)
 	end;
 
-	procedure readnumer(var numchar : char,
-						var numpos : integer,
+	procedure readnumber(var numchar : char;
+						var numpos : integer;
 						var numvalue : real);
 
 		const
@@ -96,8 +97,8 @@ program calculator(input, output);
 			count, scale : integer;
 
 	begin
-
 		numvalue := 0;
+
 		while('0' <= numchar) and (numchar < chr(ord('0') + RADIX)) do
 		begin
 			numvalue := RADIX * numvalue + ord(numchar) - ord('0');
@@ -108,6 +109,7 @@ program calculator(input, output);
 		begin
 			readchar(numchar, numpos);
 			scale := 0;
+
 			while('0' <= numchar) and (numchar < chr(ord('0') + RADIX)) do
 			begin
 				numvalue := RADIX * numvalue + ord(numchar) - ord('0');
@@ -117,12 +119,11 @@ program calculator(input, output);
 
 			for count := 1 to scale do
 				numvalue := numvalue / RADIX;
-
-		end;
-		
+		end;		
 	end;
 
-	procedure readexpression(var exprchar : char,
+	procedure readexpression(var exprchar : char;
+							 var exprpos : integer;
 							 var exprvalue : real);
 		const
 			PLUS = '+';
@@ -132,31 +133,101 @@ program calculator(input, output);
 			addop : char;
 			nexttermval : real;
 
+		procedure readterm(var termchar : char;
+						   var termpos : integer;
+						   var termvalue : real);
+
+			const
+				MULTCHAR = '*';
+				DIVCHAR = '/';
+
+			var 
+				mulop : char;
+				nextfacval : real;
+
+			procedure readfactor(var factorchar : char;
+								 var factorpos : integer;
+								 var factorvalue : real);
+
+				const
+					RADIX = 10;
+					LEFTPAREN = '(';
+					RIGHTPAREN = ')';
+
+			begin
+				if ('0' < factorchar) and (factorchar < char(ord('0') + RADIX)) then
+					readnumber(factorchar, factorpos, factorvalue)
+
+				else if factorchar = LEFTPAREN then
+				begin
+					readchar(factorchar, factorpos);
+					readexpression(factorchar, factorpos, factorvalue);
+
+					if factorchar = RIGHTPAREN then
+						readchar(factorchar, factorpos)
+
+					else
+						reporterror(factorchar, factorpos);
+				end
+
+				else
+				begin
+					reporterror(factorchar, factorpos);
+					factorvalue := 0
+				end;				
+			end;
+
+		begin
+			readfactor(termchar, termpos, termvalue);
+
+			while (termchar = MULTCHAR) or (termchar = DIVCHAR) do
+			begin				
+				mulop := termchar;
+				readchar(termchar, termpos);
+
+				readfactor(termchar, termpos, nextfacval);
+				if mulop = MULTCHAR then
+					termvalue := termvalue * nextfacval
+				else if nextfacval <> 0 then
+					termvalue := termvalue / nextfacval
+				else
+					reporterror(termchar, termpos);
+			end;			
+		end;
+
 	begin
-		readterm(exprchar, exprvalue);
+		readterm(exprchar, exprpos, exprvalue);
 
 		while (exprchar = PLUS) or (exprchar = MINUS) do
 		begin
+			addop := exprchar;
+			readchar(exprchar, exprpos);
+			readterm(exprchar, exprpos, nexttermval);
 
-			addop = exprchar;
-			readchar(exprchar);
-			readterm(exprchar, nexttermval);
 			if addop = PLUS then
-				exprvalue := addition(exprvalue, nexttermval);
+				exprvalue := addition(exprvalue, nexttermval)
 			else
-				exprvalue := substraction(exprvalue, nexttermval);
-			
-		end;	
+				exprvalue := substraction(exprvalue, nexttermval);			
+		end;
 	end;
 
 (* ======================= MAIN PROGRAM ======================= *)
 
 begin
-	readchar(nextchar);
+	nextpos := 0;
+	readchar(nextchar, nextpos);
+
 	while nextchar <> TERMINATOR do
 	begin
-		readexpression(nextchar, result);
-		writeln(result);
-		if nextchar = SEPARATOR then readchar(nextchar)
-	end	
+		readexpression(nextchar, nextpos, result);
+		if (nextchar = SEPARATOR) or (nextchar = TERMINATOR) then 
+		begin
+			writeln(result : 10  : 2);
+			if nextchar = SEPARATOR then
+				readchar(nextchar, nextpos)
+		end
+
+		else
+			reporterror(nextchar, nextpos);
+	end
 end.
