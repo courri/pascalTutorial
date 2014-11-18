@@ -16,6 +16,7 @@
 		     	28.65
  			 27000.00
   			  2197.00
+  			  
 }
 
 program calculator(input, output);
