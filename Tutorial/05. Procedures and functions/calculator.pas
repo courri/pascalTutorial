@@ -1,4 +1,16 @@
 {
+
+	The calculator program, reads arithmetic expressions following the next
+	grammar, and calculates the value of those expressions according to the 
+	arithmetic and algebraic laws embedded in the leading procedures in the
+	program. The input expressions should be attached to the syntax showed,
+	if not, the program would indicate the mistake using a ^ symbol. The output
+	is divided into lines per expression.
+
+	Note that the syntax does not include negative numbers in expression parsing.
+	If an error is catched, the expression would be evaluated until the program
+	encounters the error. With two or more errors, the behaviour is undefined.
+
 	Syntax:
 
 		<calculation> ::= <expression> ";" | <expression> "," <calculation>
@@ -11,12 +23,13 @@
 		<digit>       ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
 
 	Usage:
+
 		INPUT: 180 / (2 * 3.14159), 16 * 62.5 * 27, 169 * (5 + 8);
 		OUTPUT:
 		     	28.65
  			 27000.00
   			  2197.00
-  			  
+
 }
 
 program calculator(input, output);
@@ -51,53 +64,59 @@ program calculator(input, output);
 	procedure readchar(var ch : char; 
 					   var charpos : integer);
 
+		(* ========== CONSTANTS ========== *)
+
 		const
 			BLANLK = ' ';
 
-	begin
+	begin {readchar}
 		repeat
 
-			if eoln then
-			begin
+			if eoln then begin
 				charpos := 0;
 				ch := BLANLK;
 				readln();
 			end
 
-			else
-			begin
+			else begin
 				charpos := succ(charpos);
 				read(ch);
 			end;
 
 		until ch <> BLANLK;
-	end;
+	end; {readchar}
 
 	procedure reporterror(var errchar : char;
 						  var errcharpos : integer);
 
+		(* ========== CONSTANTS ========== *)
+
 		const
 			MARKER = '^';
 
-	begin
+	begin {reporterror}
 		writeln(MARKER : errcharpos);
 
 		while not (errchar = SEPARATOR) or (errchar = TERMINATOR) do
 			readchar(errchar, errcharpos)
-	end;
+	end; {reporterror}
 
 	procedure readnumber(var numchar : char;
 						var numpos : integer;
 						var numvalue : real);
 
+		(* ========== CONSTANTS ========== *)
+
 		const
 			POINT = '.';
 			RADIX = 10;
 
+		(* ========== VARIABLES ========== *)
+
 		var
 			count, scale : integer;
 
-	begin
+	begin {readnumber}
 		numvalue := 0;
 
 		while('0' <= numchar) and (numchar < chr(ord('0') + RADIX)) do
@@ -106,8 +125,7 @@ program calculator(input, output);
 			readchar(numchar, numpos)
 		end;
 
-		if numchar = POINT then
-		begin
+		if numchar = POINT then begin
 			readchar(numchar, numpos);
 			scale := 0;
 
@@ -121,26 +139,37 @@ program calculator(input, output);
 			for count := 1 to scale do
 				numvalue := numvalue / RADIX;
 		end;		
-	end;
+	end; {readnumber}
 
 	procedure readexpression(var exprchar : char;
 							 var exprpos : integer;
 							 var exprvalue : real);
+
+		(* ========== CONSTANTS ========== *)
+
 		const
 			PLUS = '+';
 			MINUS = '-';
+
+		(* ========== VARIABLES ========== *)
 
 		var
 			addop : char;
 			nexttermval : real;
 
+		(* ====== NESTED PROCEDURES ====== *)
+
 		procedure readterm(var termchar : char;
 						   var termpos : integer;
 						   var termvalue : real);
 
+			(* ========== CONSTANTS ========== *)
+
 			const
 				MULTCHAR = '*';
 				DIVCHAR = '/';
+
+			(* ========== VARIABLES ========== *)
 
 			var 
 				mulop : char;
@@ -150,17 +179,18 @@ program calculator(input, output);
 								 var factorpos : integer;
 								 var factorvalue : real);
 
+				(* ========== CONSTANTS ========== *)
+
 				const
 					RADIX = 10;
 					LEFTPAREN = '(';
 					RIGHTPAREN = ')';
 
-			begin
+			begin {readfactor}
 				if ('0' < factorchar) and (factorchar < char(ord('0') + RADIX)) then
 					readnumber(factorchar, factorpos, factorvalue)
 
-				else if factorchar = LEFTPAREN then
-				begin
+				else if factorchar = LEFTPAREN then begin
 					readchar(factorchar, factorpos);
 					readexpression(factorchar, factorpos, factorvalue);
 
@@ -171,14 +201,13 @@ program calculator(input, output);
 						reporterror(factorchar, factorpos);
 				end
 
-				else
-				begin
+				else begin
 					reporterror(factorchar, factorpos);
 					factorvalue := 0
 				end;				
-			end;
+			end; {readfactor}
 
-		begin
+		begin {readterm}
 			readfactor(termchar, termpos, termvalue);
 
 			while (termchar = MULTCHAR) or (termchar = DIVCHAR) do
@@ -194,9 +223,9 @@ program calculator(input, output);
 				else
 					reporterror(termchar, termpos);
 			end;			
-		end;
+		end; {readterm}
 
-	begin
+	begin {readexpression}
 		readterm(exprchar, exprpos, exprvalue);
 
 		while (exprchar = PLUS) or (exprchar = MINUS) do
@@ -210,19 +239,18 @@ program calculator(input, output);
 			else
 				exprvalue := substraction(exprvalue, nexttermval);			
 		end;
-	end;
+	end; {readexpression}
 
 (* ======================= MAIN PROGRAM ======================= *)
 
-begin
+begin {calculator}
 	nextpos := 0;
 	readchar(nextchar, nextpos);
 
 	while nextchar <> TERMINATOR do
 	begin
 		readexpression(nextchar, nextpos, result);
-		if (nextchar = SEPARATOR) or (nextchar = TERMINATOR) then 
-		begin
+		if (nextchar = SEPARATOR) or (nextchar = TERMINATOR) then begin
 			writeln(result : 10  : 2);
 			if nextchar = SEPARATOR then
 				readchar(nextchar, nextpos)
@@ -231,4 +259,4 @@ begin
 		else
 			reporterror(nextchar, nextpos);
 	end
-end.
+end. {calculator}
