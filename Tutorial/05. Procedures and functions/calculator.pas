@@ -11,6 +11,14 @@
 	If an error is catched, the expression would be evaluated until the program
 	encounters the error. With two or more errors, the behaviour is undefined.
 
+	The syntax has been designed to facilitate analysis without backtracking.
+	This means that the program can read a character at a time from the input
+	medium and choose the correct course of action wthout ever going wrong
+	and having to retrace its steps. For example, when a factor is expected,
+	the next character must be digit or a left parentheses: any other character
+	must be erroneous. The next character must be always be available for
+	inspection. 
+
 	Syntax:
 
 		<calculation> ::= <expression> ";" | <expression> "," <calculation>
@@ -141,6 +149,13 @@ program calculator(input, output);
 		end;		
 	end; {readnumber}
 
+	{
+		An expression consists of terms and factors, while a factor may
+		contain an expression, so this express the mutual recursive
+		nature of the grammar. This means that expressions may be constructed
+		recursively
+	}
+
 	procedure readexpression(var exprchar : char;
 							 var exprpos : integer;
 							 var exprvalue : real);
@@ -244,7 +259,7 @@ program calculator(input, output);
 (* ======================= MAIN PROGRAM ======================= *)
 
 begin {calculator}
-	nextpos := 0;
+	nextpos := 0; (* Position of the character *)
 	readchar(nextchar, nextpos);
 
 	while nextchar <> TERMINATOR do
