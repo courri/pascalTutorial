@@ -153,7 +153,7 @@ program calculator(input, output);
 		An expression consists of terms and factors, while a factor may
 		contain an expression, so this express the mutual recursive
 		nature of the grammar. This means that expressions may be constructed
-		recursively
+		recursively.
 	}
 
 	procedure readexpression(var exprchar : char;
