@@ -3,6 +3,7 @@ Pascal Tutorial
 
 A tutorial for learning to program in Pascal using FPC, with the purpose of understand and implement the Kamin interpreters.
 
+
 Bibliography:
 ------------
 
@@ -17,7 +18,7 @@ Bibliography:
 - Ganeshan - Pascal programming. [PS03]
 - Gonnet - Handbook of algorithms and data structures. [AL06]
 - Grogono - Programming in Pascal. [PS04]
-- Griver - Pascal programming fundamentals. [PS05]
+- Grover - Pascal programming fundamentals. [PS05]
 - Keller - A first course in computer programming using Pascal. [PS06]
 - Kernighan - Software tools in Pascal. [AL07]
 - Koffman - Problem solving and structured programmign in Pascal. [PS07]
