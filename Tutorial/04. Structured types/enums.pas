@@ -4,9 +4,13 @@ type
 var
 	name : names;
 begin
+
 	for name := eduardo to alicia do 
 		writeln(ord(name), ' : ', name);
+
 	writeln(eduardo < alicia);
+
 	writeln(alicia < eduardo);
+	
 	writeln(true > false); (* Boolean is an enum type*)
 end.
