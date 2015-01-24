@@ -17,13 +17,13 @@
 
 program sets(input, output);
 
-type
-	food = (apples, strawberries, bananas, nuts, icecream, cream, sugar, ice, passionfruit, apple,
-		cinnamon, flour);
-	dessert = set of food;
+	type
+		food = (apples, strawberries, bananas, nuts, icecream, cream, sugar, ice, passionfruit, apple,
+			cinnamon, flour);
+		dessert = set of food;
 
-var
-	sundae, applepie, passionDessert, flourPie : dessert;
+	var
+		sundae, applepie, passionDessert, flourPie : dessert;
 
 begin
 
