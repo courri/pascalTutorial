@@ -70,8 +70,9 @@ begin
 	a[6] := 4; a[7] := 5;
 	a[8] := 4; a[9] := 1;
 
-	printSequence(a);
+	writeln('Original list: '); printSequence(a);
 	bubbleSort(a, b);
+	writeln();
 	printSequence(b);
 
 	
