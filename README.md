@@ -32,3 +32,4 @@ Bibliography:
 - Wirth - Algorithms + data structures = programs. [AL015]
 - Wirth - Systematic programming, an introduction. [AL016]
 - Weiss - Data structures and algorithm analysis. [AL017]
+- Alagic, Arbib - The design of well-constructed and correct programs [AL018]
