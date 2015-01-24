@@ -9,14 +9,26 @@ program sorting(input, output);
 	procedure cpy(v : sequence; var w : sequence);
 
 		var
-			i : integer;
+			i : 0 .. 9;
 
 	begin
 		
 		for i := 0 to 9 do
 			w[i] := v[i];
 
-	end;	
+	end;
+
+	procedure randomSequence(var a : sequence);
+
+		var
+			i : 0 .. 9;	
+
+	begin
+		
+		for i := 9 downto 0 do
+			a[9 - i] := i;
+
+	end;
 
 	procedure printSequence(v : sequence);
 		var
@@ -33,7 +45,7 @@ program sorting(input, output);
 	procedure swap(var a, b : integer);
 
 		var
-			temp : integer;
+			temp : 0 .. 9;
 
 	begin
 		temp := a; a := b; b := temp		
@@ -62,6 +74,46 @@ program sorting(input, output);
 
 	end;
 
+	procedure selectionSort(v : sequence; var ans : sequence);
+
+		var
+			i, j : 0 .. 9;
+
+	begin
+
+		for i := 0 to 9 do begin
+			for j := i + 1 to 9 do begin
+				if v[j] < v[i] then
+					swap(v[i], v[j])
+			end;
+		end;
+
+		cpy(v, ans);
+		
+	end;
+
+	procedure insertionSort(v : sequence; var ans : sequence);
+
+		var
+			i, j : 0 .. 9;
+
+	begin
+
+		for i := 1 to 9 do begin
+
+			j := i;
+			
+			while ((j > 0) and (v[j - 1] > v[j])) do begin
+				swap(v[j], v[j - 1]);
+				j := j - 1
+			end;
+
+		end;
+
+		cpy(v, ans);
+		
+	end;
+
 begin
 
 	a[0] := 9; a[1] := 8;
@@ -70,9 +122,19 @@ begin
 	a[6] := 4; a[7] := 5;
 	a[8] := 4; a[9] := 1;
 
-	writeln('Original list: '); printSequence(a);
+	writeln('Original list: '); 
+	printSequence(a);
+	
+	randomSequence(b);
 	bubbleSort(a, b);
-	writeln();
+	printSequence(b);
+
+	randomSequence(b);
+	selectionSort(a, b);
+	printSequence(b);
+
+	randomSequence(b);
+	insertionSort(a, b);
 	printSequence(b);
 
 	
