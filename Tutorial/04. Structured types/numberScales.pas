@@ -31,15 +31,15 @@ program numberScales(input, output);
 			kp := kp + 1;
 			buffer[kp] := chr(num mod rad + ord('0'));
 			num := num div rad
-					
+
 		until num = 0;
 
-		for jp := kp downto 1 do
-			write(buffer[jp])
+		for jp := kp downto 1 do write(buffer[jp])
 		
 	end;
 
 begin
+
 	read(datum);
 	writeln;
 
@@ -50,5 +50,6 @@ begin
 
 	end;
 
-	writeln;
+	writeln
+
 end.
