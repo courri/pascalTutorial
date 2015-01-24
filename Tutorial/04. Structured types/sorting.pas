@@ -129,7 +129,7 @@ program sorting(input, output);
 
 				for m := 0 to (9 - jump) do begin
 					n := m + jump;
-					if v[m] > v[n] then begin
+					if v[m] > v[n] then begin {v[m] < v[n] for ascending}
 						swap(v[m], v[n]);
 						swapped := true;
 					end;
