@@ -112,6 +112,37 @@ program sorting(input, output);
 		
 	end;
 
+	procedure shellSort(v : sequence; var ans : sequence);
+
+		var
+			i, jump, n, m : 0 .. 9;
+			swapped : boolean;
+
+	begin
+		jump := 9;
+
+		while jump > 1 do begin
+			
+			jump := jump div 2;
+			repeat
+				swapped := false;
+
+				for m := 0 to (9 - jump) do begin
+					n := m + jump;
+					if v[m] > v[n] then begin
+						swap(v[m], v[n]);
+						swapped := true;
+					end;
+				end;
+				
+			until not swapped;
+
+		end;
+
+		cpy(v, ans);
+		
+	end;
+
 begin
 
 	a[0] := 9; a[1] := 8;
@@ -133,6 +164,10 @@ begin
 
 	randomSequence(b);
 	insertionSort(a, b);
+	printSequence(b);
+
+	randomSequence(b);
+	shellSort(a, b);
 	printSequence(b);
 
 	
