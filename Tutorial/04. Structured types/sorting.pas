@@ -102,12 +102,10 @@ program sorting(input, output);
 		for i := 1 to 9 do begin
 
 			j := i;
-			
 			while ((j > 0) and (v[j - 1] > v[j])) do begin
 				swap(v[j], v[j - 1]);
 				j := j - 1
 			end;
-
 		end;
 
 		cpy(v, ans);
