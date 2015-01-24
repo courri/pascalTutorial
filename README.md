@@ -31,3 +31,4 @@ Bibliography:
 - Welsh, Elder, Burstard - Sequential program structures. [AL014]
 - Wirth - Algorithms + data structures = programs. [AL015]
 - Wirth - Systematic programming, an introduction. [AL016]
+- Weiss - Data structures and algorithm analysis. [AL017]
