@@ -1,3 +1,10 @@
+{
+	vector    		upbound		lobound 		num_cells = ord(ub) - ord(lb) + 1
+	[1..10]			10			1 				10 - 1 + 1    = 10
+	[-3..2]			2			-3				2 - (-3) + 1  = 6
+	['a'..'z']		z			a    			'z' - 'a' + 1 = 26
+}
+
 program basicVector(input, output);
 
 	type
