@@ -33,3 +33,4 @@ Bibliography:
 - Wirth - Systematic programming, an introduction. [AL016]
 - Weiss - Data structures and algorithm analysis. [AL017]
 - Alagic, Arbib - The design of well-constructed and correct programs [AL018]
+- Nievergelt, Hinrichs - Algorithms and data structures [AL019]
