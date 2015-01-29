@@ -127,8 +127,7 @@ program calculator(input, output);
 	begin {readnumber}
 		numvalue := 0;
 
-		while('0' <= numchar) and (numchar < chr(ord('0') + RADIX)) do
-		begin
+		while('0' <= numchar) and (numchar < chr(ord('0') + RADIX)) do begin
 			numvalue := RADIX * numvalue + ord(numchar) - ord('0');
 			readchar(numchar, numpos)
 		end;
@@ -137,8 +136,7 @@ program calculator(input, output);
 			readchar(numchar, numpos);
 			scale := 0;
 
-			while('0' <= numchar) and (numchar < chr(ord('0') + RADIX)) do
-			begin
+			while('0' <= numchar) and (numchar < chr(ord('0') + RADIX)) do begin
 				numvalue := RADIX * numvalue + ord(numchar) - ord('0');
 				readchar(numchar, numpos);
 				scale := succ(scale);
