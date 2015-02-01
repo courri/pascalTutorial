@@ -223,8 +223,7 @@ program calculator(input, output);
 		begin {readterm}
 			readfactor(termchar, termpos, termvalue);
 
-			while (termchar = MULTCHAR) or (termchar = DIVCHAR) do
-			begin				
+			while (termchar = MULTCHAR) or (termchar = DIVCHAR) do begin				
 				mulop := termchar;
 				readchar(termchar, termpos);
 
@@ -241,8 +240,7 @@ program calculator(input, output);
 	begin {readexpression}
 		readterm(exprchar, exprpos, exprvalue);
 
-		while (exprchar = PLUS) or (exprchar = MINUS) do
-		begin
+		while (exprchar = PLUS) or (exprchar = MINUS) do begin
 			addop := exprchar;
 			readchar(exprchar, exprpos);
 			readterm(exprchar, exprpos, nexttermval);
@@ -260,8 +258,7 @@ begin {calculator}
 	nextpos := 0; (* Position of the character *)
 	readchar(nextchar, nextpos);
 
-	while nextchar <> TERMINATOR do
-	begin
+	while nextchar <> TERMINATOR do begin
 		readexpression(nextchar, nextpos, result);
 		if (nextchar = SEPARATOR) or (nextchar = TERMINATOR) then begin
 			writeln(result : 10  : 2);
