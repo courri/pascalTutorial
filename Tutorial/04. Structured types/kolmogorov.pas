@@ -110,7 +110,7 @@ program Kolmogorov(input, output);
 
 				for m := 0 to (size - jump) do begin
 					n := m + jump;
-					if v[m] > v[n] then begin {v[m] < v[n] for ascending}
+					if v[m] > v[n] then begin
 						swap(v[m], v[n]);
 						swapped := true;
 					end;
