@@ -9,7 +9,6 @@ program pascalTraingle(input, output);
 		else
 			pascal := pascal(r - 1, c - 1) + pascal(r - 1, c) 
 	end;
-	
 
 	procedure triangle(bound : integer);
 		var i, j : integer;
@@ -25,7 +24,6 @@ program pascalTraingle(input, output);
 			writeln();
 		end;
 	end;
-
 
 begin
 	read(rows);
