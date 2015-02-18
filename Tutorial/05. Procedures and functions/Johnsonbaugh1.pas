@@ -204,8 +204,7 @@ program basicAlgorithms(input, output);
 		ans := 0;
 		for i := 2 to MAX do
 			if s[i] < s[i - 1] then begin
-				ans := i;
-				goto final
+			h
 			end;
 		final:
 			writeln(ans);
