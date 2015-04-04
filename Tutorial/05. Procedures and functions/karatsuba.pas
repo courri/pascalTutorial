@@ -216,7 +216,7 @@ program Karatsuba(input, output);
 	procedure karatsubaOffman(u, v : largeInt; var ans : largeInt);
 		var
 			mid, prod : integer;
-			u1, u2, v1, v2, a, b, c, d, e, f, p, q, r: largeInt;
+			u1, u2, v1, v2, a, b, c, d, e, p, q, r: largeInt;
 	begin
 		if u.size < 3 then begin
 			prod := largeIntToInt(u) * largeIntToInt(v);
@@ -246,9 +246,8 @@ program Karatsuba(input, output);
 			paddingLargeInt(d, mid);
 
 			addLargeInt(p, d, e);
-			addLargeInt(e, q, f);
+			addLargeInt(e, q, ans);
 
-			displayLargeInt(f, TRUE);
 		end;
 
 	end;
@@ -259,21 +258,13 @@ program Karatsuba(input, output);
 			n, s : integer;
 	begin
 
-		u.size := 4; 
-		u.number[1] := 2;
-		u.number[2] := 3;
-		u.number[3] := 4;
-		u.number[4] := 5;
+		intToLargeInt(2345, u);
 
 		write('u = ');
 		displayLargeInt(u, FALSE);
 		writeln();
 
-		v.size := 4;
-		v.number[1] := 6;
-		v.number[2] := 7;
-		v.number[3] := 8;
-		v.number[4] := 9;
+		intToLargeInt(6789, v);
 
 		write('v = ');
 		displayLargeInt(v, FALSE);
@@ -302,21 +293,13 @@ program Karatsuba(input, output);
 		displayLargeInt(z, FALSE);
 		writeln();
 
-		p.size := 4;
-		p.number[1] := 1;
-		p.number[2] := 5;
-		p.number[3] := 4;
-		p.number[4] := 1;
+		intToLargeInt(1541, p);
 
 		write('p = ');
 		displayLargeInt(p, FALSE);
 		writeln();
 
-		q.size := 4;
-		q.number[1] := 4;
-		q.number[2] := 0;
-		q.number[3] := 0;
-		q.number[4] := 5;
+		intToLargeInt(4005, q);
 
 		write('q = ');
 		displayLargeInt(q, FALSE);
@@ -332,12 +315,7 @@ program Karatsuba(input, output);
 		displayLargeInt(b, FALSE);
 		writeln();
 
-		r.size := 5;
-		r.number[1] := 1;
-		r.number[2] := 0;
-		r.number[3] := 6;
-		r.number[4] := 0;
-		r.number[5] := 8;
+		intToLargeInt(10608, r);
 
 		write('r = ');
 		displayLargeInt(r, FALSE);
@@ -371,8 +349,8 @@ program Karatsuba(input, output);
 	end;
 
 begin
-	
-	driver(x, y);
+
+	driver(x, y);	
 	karatsubaOffman(x, y, ans);
 	displayLargeInt(ans, TRUE);
 
