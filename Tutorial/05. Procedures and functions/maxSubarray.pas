@@ -171,7 +171,6 @@ begin
 			2 : writeln('The max sum is: ', maxSubarrayFaster(a, n));
 			3 : writeln('The max sum is: ', maxSubarrayDivideAndConquer(a, 1, n));
 			4 : writeln('The max sum is: ', maxSubarrayDynamicProgramming(a, n));
-				
 		end;
 		
 	end;
